@@ -1,0 +1,111 @@
+<h1>Actividad</h1>
+<p>El estudiante debe <strong>ejecutar y revisar el pipeline de ejemplo de
+    Apache Airflow y dbt</strong> del repositorio
+  <a href="https://github.com/SS2-USAC/apache_airflow_dbt" target="_blank"
+    rel="noopener">apache_airflow_dbt</a>.</p>
+<p><strong>Entorno de trabajo:</strong></p>
+<ul>
+  <li><strong>Fuera de clase:</strong> descargar o clonar el repositorio completo,
+    iniciar Docker Desktop y ejecutar <code>docker compose up</code> desde la
+    carpeta <code>local/</code>. Abrir
+    <a href="http://localhost:8084">http://localhost:8084</a> con usuario
+    <code>admin</code> y contraseña <code>admin</code>.</li>
+  <li><strong>Durante la clase:</strong> crear un <strong>fork</strong> del
+    repositorio, preparar un DAG propio y entregarlo mediante un
+    <strong>pull request (merge request)</strong> para ejecutarlo en el
+    entorno cloud del curso. No es necesario instalar Docker para esta modalidad.</li>
+</ul>
+<p><strong>Preparación durante la clase:</strong> abrir el fork en GitHub
+  Codespaces y ejecutar los siguientes comandos, sustituyendo
+  <code>TU_CARNET</code> por los nueve dígitos de su carnet:</p>
+<pre><code>source .venv/bin/activate
+git switch -c entrega/TU_CARNET
+python scripts/crear_dag.py TU_CARNET
+</code></pre>
+<p>Editar únicamente <code>dags/TU_CARNET_airflow_dbt.py</code>. En la tarea
+  <code>verificar_ventas</code>, agregar a la consulta SQL la comprobación
+  <code>SUM(monto_neto) = 3766.75</code>, conservando las comprobaciones de
+  conteo y unicidad. Mantener el carnet, el esquema propio y las dependencias
+  generadas. No modificar los DAGs de ejemplo, los archivos dbt ni la
+  configuración del entorno.</p>
+<p>Validar y subir el archivo modificado:</p>
+<pre><code>python scripts/validar_dags.py
+git add dags/TU_CARNET_airflow_dbt.py
+git commit -m "Agregar DAG de TU_CARNET"
+git push -u origin entrega/TU_CARNET</code></pre>
+<p>Abrir un <strong>pull request hacia <code>SS2-USAC/apache_airflow_dbt:main</code></strong>
+  que incluya el archivo <code>dags/TU_CARNET_airflow_dbt.py</code> y esperar
+  que el check <code>validate</code> apruebe. El docente revisará y fusionará
+  el cambio, iniciará las ejecuciones en cloud y proporcionará el acceso
+  para consultar los resultados.</p>
+<p>Realizar los siguientes pasos en el entorno correspondiente:</p>
+<ol>
+  <li>Abrir el DAG <code>s8_dbt_sgfood</code> en local o
+    <code>estudiante_TU_CARNET_dbt</code> en cloud e identificar sus cuatro
+    tareas y el orden en que se ejecutan.</li>
+  <li>Ejecutar el DAG en local o seguir la ejecución dirigida en clase.
+    Comprobar que las tareas finalicen en <strong>success</strong> y revisar
+    el log de dbt con sus <strong>38 pruebas aprobadas</strong>.</li>
+  <li>Repetir la ejecución y revisar la tarea de validación para
+    comprobar que se mantienen <strong>10 ventas sin duplicados</strong>.</li>
+  <li>Explicar brevemente para qué sirve Airflow en este ejemplo y
+    qué ocurre si una tarea falla.</li>
+</ol>
+<h2>Evidencia solicitada</h2>
+<p>Entregar las siguientes <strong>capturas y una explicación breve</strong>,
+  usando el entorno local o el cloud de la clase:</p>
+<ul>
+  <li><strong>Solo para la modalidad de clase:</strong> enlaces al fork y al
+    pull request que contiene su DAG con la validación del total neto,
+    con el check <code>validate</code> aprobado.</li>
+  <li>El DAG con sus cuatro tareas en <strong>success</strong> y las dos
+    ejecuciones exitosas.</li>
+  <li>El log de dbt con las pruebas aprobadas y la tarea de validación
+    exitosa después de la segunda ejecución.</li>
+  <li>Una explicación de tres a cinco líneas sobre la función
+    de Airflow y el efecto de una falla en el pipeline.</li>
+</ul>
+<p>En las capturas debe aparecer el <strong>carnet del estudiante en un bloc
+    de notas</strong> y la <strong>hora visible del sistema</strong>.</p>
+<hr>
+<h1>Rúbrica de calificación</h1>
+<div class="TyagGW_tableContainer">
+  <div class="group TyagGW_tableWrapper flex flex-col-reverse w-fit" tabindex="-1">
+    <table class="w-fit min-w-(--thread-content-width)">
+      <thead>
+        <tr>
+          <th data-col-size="md" scope="col">CRITERIO</th>
+          <th data-col-size="lg" scope="col">DESCRIPCIÓN</th>
+          <th data-col-size="sm" scope="col">PUNTEO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-col-size="md">Acceso y revisión del pipeline</td>
+          <td data-col-size="lg">Accede al entorno local o cloud e identifica
+            las tareas y sus dependencias. En la modalidad de clase, crea
+            el fork y entrega su DAG con la validación del total neto mediante un pull request con
+            <code>validate</code> aprobado.</td>
+          <td data-col-size="sm">35 ptos.</td>
+        </tr>
+        <tr>
+          <td data-col-size="md">Ejecución y validación</td>
+          <td data-col-size="lg">Evidencia dos ejecuciones exitosas, las pruebas
+            dbt aprobadas y la validación de datos sin duplicados.</td>
+          <td data-col-size="sm">35 ptos.</td>
+        </tr>
+        <tr>
+          <td data-col-size="md">Explicación y evidencia final</td>
+          <td data-col-size="lg">Explica la función de Airflow y el efecto
+            de una falla. Presenta capturas con carnet y hora visible.</td>
+          <td data-col-size="sm">30 ptos.</td>
+        </tr>
+        <tr>
+          <td data-col-size="md"><strong>TOTAL</strong></td>
+          <td data-col-size="lg">&nbsp;</td>
+          <td data-col-size="sm"><strong>100 ptos.</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

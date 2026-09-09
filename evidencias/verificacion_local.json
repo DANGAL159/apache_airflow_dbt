@@ -1,0 +1,243 @@
+{
+  "started_at": "20260909T135452",
+  "cases": [
+    {
+      "dag": "s8_saludo",
+      "run": "local_20260909T135452_saludo",
+      "expected": "success",
+      "state": "success",
+      "tasks": [
+        {
+          "task_id": "preparar",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "mostrar",
+          "state": "success",
+          "try_number": 1
+        }
+      ]
+    },
+    {
+      "dag": "s8_ventas",
+      "run": "local_20260909T135452_etl",
+      "expected": "success",
+      "state": "success",
+      "tasks": [
+        {
+          "task_id": "extraer",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "transformar",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "validar",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "cargar",
+          "state": "success",
+          "try_number": 1
+        }
+      ]
+    },
+    {
+      "dag": "s8_sql_idempotente",
+      "run": "local_20260909T135452_sql",
+      "expected": "success",
+      "state": "success",
+      "tasks": [
+        {
+          "task_id": "primera_carga",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "repetir_carga",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "verificar_una_venta",
+          "state": "success",
+          "try_number": 1
+        }
+      ]
+    },
+    {
+      "dag": "s8_dbt_sgfood",
+      "run": "local_20260909T135452_dbt",
+      "expected": "success",
+      "state": "success",
+      "tasks": [
+        {
+          "task_id": "cargar_raw",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "construir_modelos_dbt",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "verificar_mart",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "revisar_fuentes",
+          "state": "success",
+          "try_number": 1
+        }
+      ]
+    },
+    {
+      "dag": "estudiante_202600001_dbt",
+      "run": "local_20260909T135452_estudiante",
+      "expected": "success",
+      "state": "success",
+      "tasks": [
+        {
+          "task_id": "cargar_raw",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "transformar_y_probar",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "verificar_ventas",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "presentar",
+          "state": "success",
+          "try_number": 1
+        }
+      ]
+    },
+    {
+      "dag": "estudiante_202600001_dbt",
+      "run": "local_20260909T135452_repeticion",
+      "expected": "success",
+      "state": "success",
+      "tasks": [
+        {
+          "task_id": "cargar_raw",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "transformar_y_probar",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "verificar_ventas",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "presentar",
+          "state": "success",
+          "try_number": 1
+        }
+      ]
+    },
+    {
+      "dag": "s8_fallos_controlados",
+      "run": "local_20260909T135452_reintento",
+      "expected": "success",
+      "state": "success",
+      "tasks": [
+        {
+          "task_id": "validar",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "publicar",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "extraer",
+          "state": "success",
+          "try_number": 2
+        }
+      ]
+    },
+    {
+      "dag": "s8_fallos_controlados",
+      "run": "local_20260909T135452_calidad",
+      "expected": "failed",
+      "state": "failed",
+      "tasks": [
+        {
+          "task_id": "extraer",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "validar",
+          "state": "failed",
+          "try_number": 1
+        },
+        {
+          "task_id": "publicar",
+          "state": "upstream_failed",
+          "try_number": 0
+        }
+      ]
+    },
+    {
+      "dag": "s8_fallos_controlados",
+      "run": "local_20260909T135452_recuperacion",
+      "expected": "success",
+      "state": "success",
+      "tasks": [
+        {
+          "task_id": "extraer",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "validar",
+          "state": "success",
+          "try_number": 1
+        },
+        {
+          "task_id": "publicar",
+          "state": "success",
+          "try_number": 1
+        }
+      ]
+    }
+  ],
+  "all_expected": true,
+  "warehouse": {
+    "analytics": {
+      "ventas": 10,
+      "unicas": 10,
+      "total": "3766.75",
+      "pruebas_dbt": 38
+    },
+    "alumno_202600001": {
+      "ventas": 10,
+      "unicas": 10,
+      "total": "3766.75",
+      "pruebas_dbt": 38
+    }
+  },
+  "verified_at": "2026-09-09T13:56:40.660992+00:00"
+}
