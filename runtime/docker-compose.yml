@@ -28,7 +28,7 @@ x-airflow: &airflow
   volumes:
     - ../live:/opt/airflow/workshop:ro
     - ../logs:/opt/airflow/logs
-    - ../auth:/opt/airflow/auth:ro
+    - ../auth:/opt/airflow/auth
     - ../dbt_config:/opt/airflow/dbt_config:ro
     - ../scripts/runtime:/opt/airflow/lab_scripts:ro
 
