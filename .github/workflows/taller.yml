@@ -1,0 +1,43 @@
+name: Taller Airflow y dbt
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: bash scripts/setup_codespace.sh
+      - run: .venv/bin/python scripts/validar_dags.py
+  deploy:
+    needs: validate
+    if: github.repository == 'SS2-USAC/apache_airflow_dbt' && github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-airflow-dbt
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+      - uses: google-github-actions/setup-gcloud@v2
+      - name: Publicar paquete validado
+        env:
+          BUCKET: ${{ vars.GCP_DAG_BUCKET }}
+        run: |
+          python scripts/build_release.py "$GITHUB_SHA"
+          gcloud storage cp ".generated/$GITHUB_SHA.zip" "gs://$BUCKET/releases/$GITHUB_SHA.zip"
+          gcloud storage cp .generated/current.json "gs://$BUCKET/current.json"

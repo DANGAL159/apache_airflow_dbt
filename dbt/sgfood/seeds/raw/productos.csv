@@ -1,0 +1,6 @@
+producto_id,nombre_producto,categoria,marca,costo_unitario,precio_lista
+10,Cafe molido 1 lb,bebidas,Marca Aurora,22.50,36.00
+11,Arroz premium 5 lb,granos,Marca Campo,28.00,43.00
+12,Aceite vegetal 1 L,abarrotes,Marca Sol,18.25,31.00
+13,Galleta familiar 500 g,snacks,Marca Dulce,11.40,20.00
+14,Salsa tomate 400 g,abarrotes,Marca Huerto,7.80,14.50

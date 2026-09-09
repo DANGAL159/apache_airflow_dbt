@@ -1,0 +1,35 @@
+name: sgfood_dbt_demo
+version: "1.0.0"
+config-version: 2
+
+profile: sgfood_dbt_demo
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+analysis-paths: ["analisis"]
+test-paths: ["tests"]
+
+clean-targets:
+  - target
+  - dbt_packages
+  - logs
+
+models:
+  sgfood_dbt_demo:
+    staging:
+      +schema: staging
+      +materialized: view
+    intermediate:
+      +schema: intermediate
+      +materialized: view
+    marts:
+      +schema: marts
+      +materialized: table
+
+seeds:
+  sgfood_dbt_demo:
+    raw:
+      +schema: raw
+      +quote_columns: false
+

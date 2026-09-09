@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: stg_sgfood__clientes
+    description: Limpieza tecnica minima del catalogo de clientes.
+    columns:
+      - name: cliente_id
+        description: Identificador unico del cliente.
+        tests:
+          - not_null
+          - unique
+      - name: segmento_cliente
+        description: Segmento comercial asignado al cliente.
+        tests:
+          - accepted_values:
+              values: ['restaurante', 'tienda', 'supermercado', 'hotel']
+
+  - name: stg_sgfood__productos
+    description: Limpieza tecnica minima del catalogo de productos.
+    columns:
+      - name: producto_id
+        tests:
+          - not_null
+          - unique
+      - name: margen_lista
+        description: Diferencia entre precio de lista y costo unitario.
+
+  - name: stg_sgfood__sucursales
+    description: Limpieza tecnica minima del catalogo de sucursales.
+    columns:
+      - name: sucursal_id
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_sgfood__ventas
+    description: Limpieza tecnica minima de las transacciones de venta.
+    columns:
+      - name: venta_id
+        tests:
+          - not_null
+          - unique
+      - name: cliente_id
+        tests:
+          - relationships:
+              to: ref('stg_sgfood__clientes')
+              field: cliente_id
+      - name: producto_id
+        tests:
+          - relationships:
+              to: ref('stg_sgfood__productos')
+              field: producto_id
+      - name: sucursal_id
+        tests:
+          - relationships:
+              to: ref('stg_sgfood__sucursales')
+              field: sucursal_id
+      - name: cantidad
+        tests:
+          - not_null
+

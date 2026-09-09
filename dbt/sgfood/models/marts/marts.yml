@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: dim_cliente
+    description: Dimension de clientes para analisis comercial de SG-Food.
+    columns:
+      - name: cliente_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_producto
+    description: Dimension de productos con categoria, marca y precios de referencia.
+    columns:
+      - name: producto_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_sucursal
+    description: Dimension de sucursales o centros de distribucion.
+    columns:
+      - name: sucursal_id
+        tests:
+          - not_null
+          - unique
+
+  - name: fact_ventas
+    description: Tabla de hechos de ventas a nivel de linea de venta.
+    columns:
+      - name: venta_id
+        tests:
+          - not_null
+          - unique
+      - name: cliente_id
+        tests:
+          - relationships:
+              to: ref('dim_cliente')
+              field: cliente_id
+      - name: producto_id
+        tests:
+          - relationships:
+              to: ref('dim_producto')
+              field: producto_id
+      - name: sucursal_id
+        tests:
+          - relationships:
+              to: ref('dim_sucursal')
+              field: sucursal_id
+
+  - name: mart_ventas_por_categoria
+    description: Mart agregado para analizar ventas, unidades y margen por fecha, categoria y canal.
+    columns:
+      - name: fecha_venta
+        tests:
+          - not_null
+      - name: categoria
+        tests:
+          - not_null
+      - name: canal
+        tests:
+          - accepted_values:
+              values: ['mayorista', 'minorista']
+

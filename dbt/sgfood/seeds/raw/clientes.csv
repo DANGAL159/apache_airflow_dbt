@@ -1,0 +1,6 @@
+cliente_id,nombre_cliente,segmento_cliente,ciudad,pais,fecha_registro
+1,Restaurante Los Volcanes,restaurante,Guatemala,Guatemala,2025-01-15
+2,Mini Market Zona 10,tienda,Guatemala,Guatemala,2025-02-01
+3,Cafeteria Central,restaurante,Antigua Guatemala,Guatemala,2025-02-20
+4,Super Barrio Norte,supermercado,Mixco,Guatemala,2025-03-05
+5,Hotel Lago Azul,hotel,Panajachel,Guatemala,2025-03-22

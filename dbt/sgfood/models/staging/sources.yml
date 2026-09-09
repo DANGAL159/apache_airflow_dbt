@@ -1,0 +1,41 @@
+version: 2
+
+sources:
+  - name: raw_sgfood
+    description: Datos crudos de SG-Food cargados en PostgreSQL. En este ejemplo provienen de seeds; en Proyecto 1 deberian cargarse con Python y Airflow.
+    database: "{{ target.database }}"
+    schema: "{{ target.schema }}_raw"
+    tables:
+      - name: clientes
+        description: Catalogo operacional de clientes.
+        columns:
+          - name: cliente_id
+            tests:
+              - not_null
+              - unique
+      - name: productos
+        description: Catalogo operacional de productos.
+        columns:
+          - name: producto_id
+            tests:
+              - not_null
+              - unique
+      - name: sucursales
+        description: Catalogo operacional de centros de distribucion.
+        columns:
+          - name: sucursal_id
+            tests:
+              - not_null
+              - unique
+      - name: ventas
+        description: Transacciones de ventas de SG-Food.
+        columns:
+          - name: venta_id
+            tests:
+              - not_null
+              - unique
+          - name: canal
+            tests:
+              - accepted_values:
+                  values: ['mayorista', 'minorista']
+

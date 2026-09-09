@@ -1,0 +1,4 @@
+{$AIRFLOW_HOST} {
+    encode gzip
+    reverse_proxy airflow-api-server:8080
+}
