@@ -18,6 +18,8 @@ python scripts/crear_dag.py TU_CARNET
 
 Reemplaza `TU_CARNET` por los nueve dígitos de tu carnet. Edita el archivo generado en `dags/`, agrega una validación SQL del total neto y explica tu decisión en el PR.
 
+El único archivo que debes modificar y entregar es `dags/TU_CARNET_airflow_dbt.py`. En la tarea `verificar_ventas`, agrega `SUM(monto_neto) = 3766.75` a la consulta SQL, conservando las comprobaciones de conteo y unicidad. Mantén tu carnet, esquema y dependencias. No necesitas modificar los ejemplos, `dbt/`, `dbt_config/`, `local/`, el `Dockerfile` ni los workflows. La infraestructura cloud es administrada por el docente fuera de los archivos publicados del taller.
+
 ```bash
 python scripts/validar_dags.py
 git add dags/TU_CARNET_airflow_dbt.py
@@ -62,5 +64,4 @@ El despliegue envía un paquete completo con DAGs y fuentes dbt. La VM verifica 
 
 - [Ejecutar y probar en local con Docker Compose](local/README.md)
 - [Hoja de trabajo en HTML](docs/hoja_de_trabajo_airflow_dbt.html)
-- [Infraestructura Terraform](infra/terraform/README.md)
 - [Acceso y comprobaciones del despliegue](docs/despliegue.md)

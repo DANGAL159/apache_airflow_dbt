@@ -21,7 +21,15 @@
 <pre><code>source .venv/bin/activate
 git switch -c entrega/TU_CARNET
 python scripts/crear_dag.py TU_CARNET
-python scripts/validar_dags.py
+</code></pre>
+<p>Editar únicamente <code>dags/TU_CARNET_airflow_dbt.py</code>. En la tarea
+  <code>verificar_ventas</code>, agregar a la consulta SQL la comprobación
+  <code>SUM(monto_neto) = 3766.75</code>, conservando las comprobaciones de
+  conteo y unicidad. Mantener el carnet, el esquema propio y las dependencias
+  generadas. No modificar los DAGs de ejemplo, los archivos dbt ni la
+  configuración del entorno.</p>
+<p>Validar y subir el archivo modificado:</p>
+<pre><code>python scripts/validar_dags.py
 git add dags/TU_CARNET_airflow_dbt.py
 git commit -m "Agregar DAG de TU_CARNET"
 git push -u origin entrega/TU_CARNET</code></pre>
@@ -48,7 +56,8 @@ git push -u origin entrega/TU_CARNET</code></pre>
   usando el entorno local o el cloud de la clase:</p>
 <ul>
   <li><strong>Solo para la modalidad de clase:</strong> enlaces al fork y al
-    pull request que contiene su DAG, con el check <code>validate</code> aprobado.</li>
+    pull request que contiene su DAG con la validación del total neto,
+    con el check <code>validate</code> aprobado.</li>
   <li>El DAG con sus cuatro tareas en <strong>success</strong> y las dos
     ejecuciones exitosas.</li>
   <li>El log de dbt con las pruebas aprobadas y la tarea de validación
@@ -75,7 +84,7 @@ git push -u origin entrega/TU_CARNET</code></pre>
           <td data-col-size="md">Acceso y revisión del pipeline</td>
           <td data-col-size="lg">Accede al entorno local o cloud e identifica
             las tareas y sus dependencias. En la modalidad de clase, crea
-            el fork y entrega su DAG mediante un pull request con
+            el fork y entrega su DAG con la validación del total neto mediante un pull request con
             <code>validate</code> aprobado.</td>
           <td data-col-size="sm">35 ptos.</td>
         </tr>
