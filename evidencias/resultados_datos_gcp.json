@@ -1,0 +1,22 @@
+{
+  "verified_at": "2026-09-09T13:31:11.545400+00:00",
+  "warehouse": {
+    "analytics": {
+      "ventas": 10,
+      "ventas_unicas": 10,
+      "total_neto": "3766.75",
+      "pruebas_dbt": 38,
+      "recursos_dbt": 52
+    },
+    "alumno_202600001": {
+      "ventas": 10,
+      "ventas_unicas": 10,
+      "total_neto": "3766.75",
+      "pruebas_dbt": 38,
+      "recursos_dbt": 52
+    }
+  },
+  "sql_idempotente": "1,50.00",
+  "etl_total": "95.00",
+  "etl_filas": 3
+}
