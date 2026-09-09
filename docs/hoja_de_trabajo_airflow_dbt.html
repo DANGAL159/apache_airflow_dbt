@@ -1,0 +1,122 @@
+<h1>Actividad</h1>
+<p>El estudiante debe <strong>crear, ejecutar y validar un pipeline de datos con
+    Apache Airflow y dbt</strong>, utilizando como base el repositorio
+  <a href="https://github.com/SS2-USAC/apache_airflow_dbt" target="_blank"
+    rel="noopener">apache_airflow_dbt</a>. La dinámica consiste en trabajar en
+  una rama propia, comprobar el pipeline en un entorno local con Docker y
+  entregar los cambios mediante un <strong>pull request</strong>.</p>
+<p>Para desarrollar la actividad, el estudiante debe:</p>
+<ol>
+  <li>Crear un <strong>fork</strong> del repositorio y abrirlo en
+    <strong>GitHub Codespaces</strong>. Crear una rama con el nombre
+    <code>entrega/TU_CARNET</code>.</li>
+  <li>Activar el entorno con <code>source .venv/bin/activate</code> y ejecutar
+    <code>python scripts/crear_dag.py TU_CARNET</code>, sustituyendo
+    <code>TU_CARNET</code> por los nueve dígitos de su carnet. El archivo debe
+    quedar en <code>dags/TU_CARNET_airflow_dbt.py</code>, con el identificador
+    <code>estudiante_TU_CARNET_dbt</code>.</li>
+  <li>Revisar las tareas de carga, transformación y validación. Agregar en
+    <code>verificar_ventas</code> una comprobación SQL que confirme que la suma
+    de <code>monto_neto</code> es <strong>3766.75</strong>, además de las
+    comprobaciones de conteo y unicidad existentes. Conservar el esquema
+    <code>alumno_TU_CARNET</code> asignado a su DAG.</li>
+  <li>Ejecutar <code>python scripts/validar_dags.py</code>, corregir los errores
+    encontrados y subir los cambios a su rama. Clonar en su equipo el
+    <strong>repositorio completo de su fork</strong> y seleccionar esa misma
+    rama para realizar la prueba local.</li>
+  <li>Con Docker Desktop iniciado y utilizando contenedores Linux, entrar a la
+    carpeta <code>local/</code> y ejecutar <strong><code>docker compose
+        up</code></strong>. Esperar la inicialización y abrir
+    <a href="http://localhost:8084" target="_blank" rel="noopener">http://localhost:8084</a>
+    con el usuario <code>admin</code> y la contraseña <code>admin</code>,
+    correspondientes únicamente al entorno local.</li>
+  <li>Habilitar y ejecutar su DAG. Verificar que las cuatro tareas finalicen en
+    <strong>success</strong> y que dbt apruebe sus <strong>38 pruebas</strong>.
+    Ejecutar el pipeline una segunda vez y comprobar en su tabla
+    <code>alumno_TU_CARNET_marts.fact_ventas</code> que permanecen
+    <strong>10 ventas, 10 identificadores únicos y un total neto de
+      3766.75</strong>.</li>
+  <li>Abrir un <strong>pull request</strong> desde su rama hacia
+    <code>SS2-USAC/apache_airflow_dbt:main</code>. Incluir su carnet y explicar
+    la validación agregada. El check <strong>validate</strong> debe terminar
+    correctamente. Después de la revisión y fusión por parte del docente,
+    GitHub Actions publicará el DAG en el Airflow del curso en GCP.</li>
+</ol>
+<p>Como evidencia final, el estudiante debe <strong>mostrar su DAG ejecutado
+    correctamente en Airflow</strong> y presentar en <strong>un bloc de
+    notas</strong> su <strong>carnet</strong>, junto con la <strong>hora visible
+    del sistema</strong>. En las capturas debe observarse claramente:</p>
+<ul>
+  <li>El entorno local iniciado y el DAG del estudiante con sus tareas
+    completadas correctamente.</li>
+  <li>La validación de datos y la segunda ejecución sin duplicados.</li>
+  <li>El bloc de notas con el <strong>carnet del estudiante</strong>.</li>
+  <li>La <strong>hora del sistema visible</strong> en la pantalla.</li>
+</ul>
+<p>La actividad busca comprobar que el estudiante puede levantar el entorno,
+  adaptar un DAG, validar sus resultados y participar en un flujo de entrega
+  colaborativo. La entrega se realiza con el <strong>PR abierto y el check
+    aprobado</strong>; la revisión, fusión y ejecución en GCP corresponden a
+  la etapa posterior coordinada por el docente.</p>
+<h2>Evidencia solicitada</h2>
+<p><strong>Capturas de pantalla y enlaces</strong> mostrando:</p>
+<ul>
+  <li>Salida de <code>docker compose ps -a</code>: los servicios permanentes
+    activos y los servicios <code>prepare</code> y <code>airflow-init</code>
+    finalizados con código 0.</li>
+  <li>El grafo de <code>estudiante_TU_CARNET_dbt</code> con sus cuatro tareas
+    en <strong>success</strong> y las dos ejecuciones exitosas.</li>
+  <li>El log de dbt con las pruebas aprobadas y la consulta SQL posterior a la
+    segunda ejecución, mostrando <strong>10 ventas únicas y total neto
+      3766.75</strong>.</li>
+  <li>El enlace al <strong>pull request</strong>, el check
+    <strong>validate</strong> aprobado y una explicación breve de la
+    validación SQL agregada.</li>
+  <li><strong>Carnet</strong> escrito correctamente en un bloc de notas y
+    <strong>hora visible del sistema</strong> en las capturas de ejecución.</li>
+</ul>
+<hr>
+<h1>Rúbrica de calificación</h1>
+<div class="TyagGW_tableContainer">
+  <div class="group TyagGW_tableWrapper flex flex-col-reverse w-fit" tabindex="-1">
+    <table class="w-fit min-w-(--thread-content-width)">
+      <thead>
+        <tr>
+          <th data-col-size="md" scope="col">CRITERIO</th>
+          <th data-col-size="lg" scope="col">DESCRIPCIÓN</th>
+          <th data-col-size="sm" scope="col">PUNTEO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-col-size="md">Preparación del entorno local</td>
+          <td data-col-size="lg">Levanta correctamente los servicios con Docker
+            Compose, accede a Airflow y evidencia que la inicialización y los
+            servicios permanentes funcionan.</td>
+          <td data-col-size="sm">35 ptos.</td>
+        </tr>
+        <tr>
+          <td data-col-size="md">Personalización y ejecución del pipeline</td>
+          <td data-col-size="lg">Crea el DAG con su carnet y esquema propio,
+            agrega la validación del total neto, ejecuta correctamente el
+            pipeline y demuestra que la segunda ejecución conserva 10 ventas
+            únicas, con total 3766.75 y pruebas dbt aprobadas.</td>
+          <td data-col-size="sm">35 ptos.</td>
+        </tr>
+        <tr>
+          <td data-col-size="md">Entrega colaborativa y evidencia final</td>
+          <td data-col-size="lg">Entrega el pull request con el check validate
+            aprobado, explica su cambio y presenta las evidencias completas
+            con <strong>carnet</strong> en bloc de notas y <strong>hora visible
+              del sistema</strong>.</td>
+          <td data-col-size="sm">30 ptos.</td>
+        </tr>
+        <tr>
+          <td data-col-size="md"><strong>TOTAL</strong></td>
+          <td data-col-size="lg">&nbsp;</td>
+          <td data-col-size="sm"><strong>100 ptos.</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
