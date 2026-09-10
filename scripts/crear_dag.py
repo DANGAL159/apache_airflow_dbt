@@ -5,10 +5,10 @@ import re
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("carnet", help="Carnet de 9 digitos")
+    parser.add_argument("carnet", help="Carnet numerico de longitud variable")
     args = parser.parse_args()
-    if not re.fullmatch(r"\d{9}", args.carnet):
-        parser.error("El carnet debe contener exactamente 9 digitos")
+    if not re.fullmatch(r"[0-9]+", args.carnet):
+        parser.error("El carnet debe contener uno o mas digitos (0-9)")
     root = Path(__file__).resolve().parents[1]
     target = root / "dags" / f"{args.carnet}_airflow_dbt.py"
     template = (root / "plantillas/estudiante_dbt.py.template").read_text(encoding="utf-8")
