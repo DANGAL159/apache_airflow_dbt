@@ -16,7 +16,7 @@ git switch -c entrega/TU_CARNET
 python scripts/crear_dag.py TU_CARNET
 ```
 
-Reemplaza `TU_CARNET` por los nueve dígitos de tu carnet. Edita el archivo generado en `dags/`, agrega una validación SQL del total neto y explica tu decisión en el PR.
+Reemplaza `TU_CARNET` por tu carnet numérico completo. Edita el archivo generado en `dags/`, agrega una validación SQL del total neto y explica tu decisión en el PR.
 
 El único archivo que debes modificar y entregar es `dags/TU_CARNET_airflow_dbt.py`. En la tarea `verificar_ventas`, agrega `SUM(monto_neto) = 3766.75` a la consulta SQL, conservando las comprobaciones de conteo y unicidad. Mantén tu carnet, esquema y dependencias. No necesitas modificar los ejemplos, `dbt/`, `dbt_config/`, `local/`, el `Dockerfile` ni los workflows. La infraestructura cloud es administrada por el docente fuera de los archivos publicados del taller.
 
