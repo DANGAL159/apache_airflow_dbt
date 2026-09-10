@@ -42,7 +42,7 @@ docker compose run --rm --no-deps --user "$(id -u):0" --entrypoint python -v "$(
 docker compose run --rm --no-deps --user "$(id -u):0" --entrypoint python -v "$(cd .. && pwd):/workspace" -w /workspace airflow-scheduler scripts/validar_dags.py
 ```
 
-Sustituye `TU_CARNET` por nueve dígitos. Edita `../dags/TU_CARNET_airflow_dbt.py`; agrega la validación del total neto **3766.75** a `verificar_ventas`. Airflow detecta el archivo, aunque puede tardar unos minutos en mostrarlo.
+Sustituye `TU_CARNET` por tu carnet numérico completo. Edita `../dags/TU_CARNET_airflow_dbt.py`; agrega la validación del total neto **3766.75** a `verificar_ventas`. Airflow detecta el archivo, aunque puede tardar unos minutos en mostrarlo.
 
 ## Probar
 

@@ -22,9 +22,9 @@ def main():
         if not dags:
             errors[str(path)] = "El archivo no publica ningun DAG"
         if not path.name.startswith("s8_"):
-            match = re.fullmatch(r"(\d{9})_[a-z0-9_]+\.py", path.name)
+            match = re.fullmatch(r"([0-9]+)_[a-z0-9_]+\.py", path.name)
             if not match:
-                errors[str(path)] = "Usar dags/<carnet de 9 digitos>_<nombre>.py"
+                errors[str(path)] = "Usar dags/<carnet numerico>_<nombre>.py"
             elif any(not dag.dag_id.startswith(f"estudiante_{match[1]}_") for dag in dags):
                 errors[str(path)] = "El dag_id debe comenzar con estudiante_<carnet>_"
             for dag in dags:
